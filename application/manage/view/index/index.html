@@ -1,0 +1,60 @@
+{extend name="common/base" }
+
+{block name="style"}
+<style type="text/css">
+.admin-count-list{
+	margin-top: 0;
+	border: 1px solid #e9ecf1;
+}
+</style>
+{/block}
+
+{block name="admin-content"}
+<div class="am-g">
+	<ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-count-list ">
+		<li>
+			<a href="{:url('member/index')}" class="am-text-success">
+				<span class="am-icon-btn am-icon-user"></span>
+				<br/>管理员数<br/>{$site_info.member_num}
+			</a>
+		</li>
+		<li>
+			<a href="{:url('menu/index')}" class="am-text-success">
+				<span class="am-icon-btn am-icon-tags"></span>
+				<br/>菜单数量<br/>{$site_info.menu_num}
+			</a>
+		</li>
+		<li>
+			<a href="{:url('memberGroup/index')}" class="am-text-success">
+				<span class="am-icon-btn am-icon-file"></span>
+				<br/>附件数量<br/> {$site_info.file_num}
+			</a>
+		</li>
+		<li>
+			<a href="{:url('actionLog/index')}" class="am-text-success">
+				<span class="am-icon-btn am-icon-calendar"></span>
+				<br/>行为日志<br/>{$site_info.log_num}
+			</a>
+		</li>
+     </ul>
+</div>
+
+<div class="am-g">
+	<div class="am-u-sm-12">
+		<table class="am-table am-table-bordered">
+			<tr >
+			{volist name="server_info" id="value" mod="2"}
+				<td width="20%">{$key}</td>
+				<td width="30%" class="am-text-success">{$value}</td>
+			{eq name="mod" value="1"}
+			</tr>
+			<tr>
+			{/eq}
+			{/volist}
+				<td>扩展列表</td>
+				<td colspan="3" class="am-text-success">{$extensions_list}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+{/block}

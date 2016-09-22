@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<title>{$site_title}</title>
+	<link rel="stylesheet" href="{$lib_path}/amazeui/2.7.1/css/amazeui.css?_={$site_version}" />
+	<link rel="stylesheet" href="{$lib_path}/alertifyjs/1.8.0/css/alertify.min.css?_={$site_version}" />
+	<link rel="stylesheet" href="{$lib_path}/alertifyjs/1.8.0/css/themes/default.min.css?_={$site_version}" />
+	<link rel="stylesheet" href="{$lib_path}/icheck/1.0.2/skins/all.css?_={$site_version}" />
+	<link rel="stylesheet" href="{$module_path}/common/common.css?_={$site_version}" />
+	{block name="style"}{/block}
+</head>
+<body>
+{block name="body"}
+<div class="admin-warpper">
+
+	{block name="admin-header"}
+		{include file="common/header" /}
+	{/block}
+	
+	<div class="admin-content">
+	
+		{block name="admin-sidebar"}
+			{include file="common/sidebar" /}
+		{/block}
+		
+		<div class="admin-area">
+			<hr data-am-widget="divider" class="am-divider am-divider-dashed am-no-layout">
+		
+			{block name="admin-content"}{/block}
+		</div>
+		
+	</div>
+	
+</div>
+{/block}
+<script type="text/javascript" src="{$lib_path}/jquery/2.0.0/jquery.min.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/amazeui/2.7.1/js/amazeui.min.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/alertifyjs/1.8.0/alertify.min.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/icheck/1.0.2/icheck.min.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/require/2.3.1/require.min.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$module_path}/common/common.js?_={$site_version}"></script>
+<script type="text/javascript" >
+require.config({
+	paths: {
+		"ace" : "{$lib_path}/ace/1.2.5/lib/ace"
+	}
+});
+</script>
+{block name="script"}{/block}
+<div class="am-hide">
+	<script src="http://s11.cnzz.com/z_stat.php?id=1260438438&web_id=1260438438" language="JavaScript"></script>
+</div>
+</body>
+</html>

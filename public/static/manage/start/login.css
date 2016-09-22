@@ -1,0 +1,52 @@
+body{
+	padding: 20px;
+	background-image: -webkit-gradient(linear, left top, right bottom, from(rgb(29,74,137)), to(rgb(120,164,199)));
+	background-image: -webkit-linear-gradient(left top, rgb(29,74,137), rgb(120,164,199));
+	background-image: -moz-linear-gradient(left top, rgb(29,74,137), rgb(120,164,199));
+	background-image: -o-linear-gradient(left top, rgb(29,74,137), rgb(120,164,199));
+	background-image: -ms-linear-gradient(left top, rgb(29,74,137), rgb(120,164,199));
+	background-image: linear-gradient(left top, rgb(29,74,137), rgb(120,164,199));
+}
+.login-content{
+	max-width: 35rem;
+	margin-top: -2rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 30rem;
+	padding-top: 50vh;
+}
+.login-content .login-area{
+	width: 100%;
+	padding: 2rem;
+	background: #fff;
+	border-radius: 2rem;
+	transform: translateY(-50%);
+}
+.login-content .login-area .login-title{
+	text-align: center;
+	font-size: 2.2rem;
+	color: #0e90d2;
+	padding-bottom: 1rem;
+	margin-bottom: 2rem;
+	border-bottom: 1px dashed #009CDA;
+}
+.login-content .login-area .login-code{
+	max-height: 3rem;
+	max-width: 100%;
+}
+.login-content .login-area .login-code-change{
+	line-height: 3rem;
+	font-size: 1.7rem;
+	text-align: center;
+	cursor: pointer;
+}
+.login-content .login-area .login-btn{
+	margin-top: 1.7rem;
+}
+
+@media screen and (max-width: 500px) {
+	.login-content .login-area .login-code-change{
+		line-height: 2rem;
+		font-size: 1.2rem;
+	}
+}

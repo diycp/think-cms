@@ -1,0 +1,46 @@
+{extend name="common/base" }
+{block name="style"}
+<link rel="stylesheet" href="{$module_path}/start/login.css?_={$site_version}" />
+{/block}
+
+{block name="body"}
+<div class="login-content">
+	<form class="login-form" action="{$login_url}">
+		<div class="login-area">
+			<h2 class="login-title">{$site_title}</h2>
+
+			<div class="am-form-group am-form-icon">
+				<i class="am-icon-user am-icon-fw"></i>
+				<input type="text" class="am-form-field am-round" name="user_name" placeholder="用户名">
+			</div>
+
+			<div class="am-form-group am-form-icon">
+				<i class="am-icon-key am-icon-fw"></i>
+				<input type="password" class="am-form-field am-round" name="user_passwd" placeholder="密码">
+			</div>
+
+			<div class="am-form-group am-form-icon">
+				<i class="am-icon-eye am-icon-fw"></i>
+				<input type="text" class="am-form-field am-round" name="verify_code" id="verify_code" placeholder="验证码">
+			</div>
+
+			<div class="am-g">
+				<div class="am-u-sm-6" style="text-align: center;">
+					<a class="login-code-change"><img class="login-code" data-src="{$code_url}" src="{$code_url}" /></a>
+				</div>
+				<div class="am-u-sm-6">
+					<a href="javascript:void(0)" class="login-code-change">看不清？换一张</a>
+				</div>
+			</div>
+
+			<div class="login-btn">
+				<a class="am-btn am-btn-primary am-btn-block am-round ajax-post" target-form="login-form">立即登录</a>
+			</div>
+		</div>
+	</form>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="{$module_path}/start/login.js"></script>
+{/block}

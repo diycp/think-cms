@@ -1,0 +1,36 @@
+{
+    "name": "newday-me/newdaycms",
+    "description": "a easy way to build management system",
+    "type": "project",
+    "homepage": "https://newday.me",
+    "authors": [
+        {
+            "name": "newday",
+            "email": "newday_me@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "topthink/framework": "*",
+        "topthink/think-angular": "*",
+        "topthink/think-captcha": "*",
+        "topthink/think-helper": "*",
+        "topthink/think-image": "*",
+        "dg/mysql-dump": "*",
+        "upyun/sdk": "*",
+        "upyun/crocodile/php-sdk": "*"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/newday-me/multipart-upload-php-sdk.git"
+        }
+    ],
+    "extra": {
+        "think-path": "thinkphp"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "preferred-install": "dist"
+    }
+}

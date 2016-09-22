@@ -1,0 +1,78 @@
+{extend name="common/base" }
+
+{block name="style"}
+<style>
+	body {
+		padding: 20px;
+		background-image: -webkit-gradient(linear, left top, right bottom, from(rgb(29, 74, 137)), to(rgb(120, 164, 199)));
+		background-image: -webkit-linear-gradient(left top, rgb(29, 74, 137), rgb(120, 164, 199));
+		background-image: -moz-linear-gradient(left top, rgb(29, 74, 137), rgb(120, 164, 199));
+		background-image: -o-linear-gradient(left top, rgb(29, 74, 137), rgb(120, 164, 199));
+		background-image: -ms-linear-gradient(left top, rgb(29, 74, 137), rgb(120, 164, 199));
+		background-image: linear-gradient(left top, rgb(29, 74, 137), rgb(120, 164, 199));
+	}
+	
+	.jump-content {
+		max-width: 50rem;
+		margin-top: -2rem;
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 30rem;
+		padding-top: 50vh;
+	}
+	
+	.jump-content .jump-area {
+		width: 100%;
+		padding: 2rem;
+		background: #fff;
+		text-align: center;
+		border-radius: 0.5rem;
+		transform: translateY(-50%);
+	}
+	
+	.jump-content .jump-area .jump-tip {
+		margin-top: 1rem
+	}
+	
+	.jump-content .jump-area .jump-icon {
+		font-size: 5rem;
+	}
+</style>
+{/block}
+
+{block name="body"}
+<div class="jump-content" style="max-width: 500px;">
+	<div class="jump-area">
+		<h1><span class="{$jump.code?'am-icon-check-square':'am-icon-times-circle'} am-icon-lg jump-icon {$jump.code?'am-text-success':'am-text-danger'}"></span></h1>
+		<h1 class="jump-tip">{$jump.msg}</h1>
+		<p>
+			<a href="javascript:jumpUrl();"><span class="jump-wait">{$jump.wait}</span> 秒后自动跳转链接</a>
+		</p>
+	</div>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+	var wait = {$jump.wait};
+	var url = "{$jump.url}";
+	$(function() {
+		var time_int = setInterval(function() {
+			$('.jump-wait').text(wait);
+			wait--;
+			if(wait <= 0) {
+				clearInterval(time_int);
+				jumpUrl();
+			}
+		}, 1000);
+	});
+	function jumpUrl(){
+		if(url){
+			location.href = url;
+		}
+		else{
+			history.go(-1);
+		}
+	}
+</script>
+{/block}

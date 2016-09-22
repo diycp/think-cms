@@ -1,0 +1,80 @@
+{extend name="common/base" }
+
+{block name="admin-content"}
+<div class="am-g">
+	<div class="am-u-sm-12">
+		<form class="am-form menu-form" method="post" action="{:url('editMenu', ['menu_id' => $menu_id, 'menu_pid' => $menu['menu_pid']])}">
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					菜单名称
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<input type="text" class="am-input-sm" name="menu_name" value="{$menu.menu_name}" />
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					菜单链接
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<input type="text" class="am-input-sm" name="menu_url" value="{$menu.menu_url}" />
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					菜单分组
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<input type="text" class="am-input-sm" name="menu_group" value="{$menu.menu_group}" />
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					上级菜单
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<select name="menu_pid" data-am-selected="{btnSize: 'sm'}">
+						<option value="0">无</option>
+					{volist name="menu_tree.main_menu" id="vo"}
+						<option {eq name="menu.menu_pid" value="$vo.menu_id"}selected{/eq} value="{$vo.menu_id}">{$vo.menu_name}</option>
+						{volist name="$menu_tree['sub_menu'][$vo['menu_id']]" id="ko"}
+						<option {eq name="menu.menu_pid" value="$ko.menu_id"}selected{/eq} value="{$ko.menu_id}">--{$ko.menu_name}</option>
+						{/volist}
+					{/volist}
+					</select>
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					菜单排序
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<input type="text" class="am-input-sm" name="menu_sort" value="{$menu.menu_sort}" />
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					菜单状态
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<select name="menu_status" data-am-selected="{btnSize: 'sm'}">
+						<option {eq name="menu.menu_status" value="1"}selected{/eq} value="1">显示</option>
+						<option {eq name="menu.menu_status" value="0"}selected{/eq} value="0">隐藏</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="am-g am-margin-top">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					用户操作
+				</div>
+				<div class="am-u-sm-8 am-u-md-10">
+					<button type="button" class="am-btn am-btn-sm am-btn-primary ajax-post" target-form="menu-form" >保存菜单</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="am-btn am-btn-sm am-btn-default nd-backward">取消操作</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{/block}
