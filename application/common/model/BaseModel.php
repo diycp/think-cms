@@ -9,7 +9,7 @@ abstract class BaseModel
     /**
      * 是否缓存
      */
-    protected static $use_cache = false;
+    protected static $use_cache = true;
 
     /**
      * 数据库对象池

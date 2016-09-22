@@ -23,6 +23,10 @@
     "repositories": [
         {
             "type": "git",
+            "url": "https://github.com/newday-me/framework.git"
+        },
+        {
+            "type": "git",
             "url": "https://github.com/newday-me/multipart-upload-php-sdk.git"
         }
     ],
