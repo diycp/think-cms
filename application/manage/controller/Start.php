@@ -2,6 +2,7 @@
 namespace app\manage\controller;
 
 use think\Url;
+use think\Config;
 use think\Request;
 use app\common\validate\manage\MemberValidate;
 use app\manage\logic\LoginLogic;
@@ -33,8 +34,12 @@ class Start extends Base
         $login_url = Url::build('start/doLogin');
         $this->assign('login_url', $login_url);
         
-        $code_url = CaptchaVerifyLogic::getCodeSrc('manage_login');
-        $this->assign('code_url', $code_url);
+        $verify_code_manage = Config::get('verify_code_manage');
+        if (! empty($verify_code_manage)) {
+            $code_url = CaptchaVerifyLogic::getCodeSrc('manage_login');
+            $this->assign('code_url', $code_url);
+        }
+        $this->assign('verify_code_manage', $verify_code_manage);
         
         return $this->fetch();
     }
@@ -55,7 +60,8 @@ class Start extends Base
             return $this->error($validate->getError());
         }
         
-        if (! CaptchaVerifyLogic::checkCode($request->param('verify_code'), 'manage_login')) {
+        $verify_code_manage = Config::get('verify_code_manage');
+        if (! empty($verify_code_manage) && ! CaptchaVerifyLogic::checkCode($request->param('verify_code'), 'manage_login')) {
             return $this->error('验证码错误');
         }
         

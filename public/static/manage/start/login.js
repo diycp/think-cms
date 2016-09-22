@@ -6,6 +6,12 @@ $(function() {
 		$('#verify_code').focus();
 	});
 	
+	$('#user_passwd').keydown(function(e) {
+		if (e.keyCode == 13) {
+			$('.ajax-post').click();
+		}
+	});
+	
 	$('#verify_code').keydown(function(e) {
 		if (e.keyCode == 13) {
 			$('.ajax-post').click();

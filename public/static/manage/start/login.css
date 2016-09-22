@@ -41,7 +41,8 @@ body{
 	cursor: pointer;
 }
 .login-content .login-area .login-btn{
-	margin-top: 1.7rem;
+	margin-top: 2rem;
+	margin-bottom: 1.2rem;
 }
 
 @media screen and (max-width: 500px) {

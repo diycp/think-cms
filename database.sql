@@ -1,4 +1,4 @@
--- Created at 22.9.2016 16:50 using David Grudl MySQL Dump Utility
+-- Created at 22.9.2016 17:57 using David Grudl MySQL Dump Utility
 -- Host: cms.wxhand.com
 -- MySQL Server: 5.5.40
 -- Database: cms
@@ -47,7 +47,7 @@ CREATE TABLE `nd_manage_config` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `config_name` (`config_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 INSERT INTO `nd_manage_config` (`id`, `config_name`, `config_value`, `config_type`, `config_title`, `config_group`, `config_extra`, `config_sort`, `config_remark`, `create_time`, `update_time`) VALUES
 (1,	'app_debug',	'0',	'radio',	'调试模式',	'核心',	'0:关闭|1:开启',	1,	'',	1474430754,	1474506766),
@@ -63,9 +63,9 @@ INSERT INTO `nd_manage_config` (`id`, `config_name`, `config_value`, `config_typ
 (11,	'session',	'{\"id\":\"\",\"var_session_id\":\"\",\"prefix\":\"think\",\"type\":\"\",\"auto_start\":1}',	'array',	'会话设置',	'核心',	'id,var_session_id,prefix,type,auto_start',	11,	'',	1474462820,	1474506766),
 (12,	'cookie',	'{\"prefix\":\"\",\"expire\":0,\"path\":\"\\/\",\"domain\":\"\",\"secure\":0,\"httponly\":\"\",\"setcookie\":1}',	'array',	'Cookie设置',	'核心',	'prefix,expire,path,domain,secure,httponly,setcookie',	12,	'',	1474465033,	1474506766),
 (13,	'paginate',	'{\"type\":\"bootstrap\",\"var_page\":\"page\",\"list_rows\":15}',	'array',	'分页配置',	'核心',	'type,var_page,list_rows',	13,	'',	1474465205,	1474506766),
-(14,	'log_level_manage',	'0',	'select',	'日志等级',	'后台',	'0:不记录|1:ajax、post方法，有提交数据|2:ajax、post方法|3:有提交数据|4:记录所有',	50,	'',	1474429684,	1474523632),
-(15,	'login_driver_manage',	'\\app\\common\\driver\\login\\CookieLogin',	'radio',	'登录驱动',	'后台',	'\\app\\common\\driver\\login\\CookieLogin:Cookie驱动|\\app\\common\\driver\\login\\SessionLogin:Session驱动',	51,	'',	1474421089,	1474523632),
-(16,	'public_action_manage',	'[\"manage.start.*\",\"index.index.*\"]',	'array',	'公共行为',	'后台',	'',	52,	'',	1474434515,	1474523632),
+(14,	'log_level_manage',	'0',	'select',	'日志等级',	'后台',	'0:不记录|1:ajax、post方法，有提交数据|2:ajax、post方法|3:有提交数据|4:记录所有',	51,	'',	1474429684,	1474537762),
+(15,	'login_driver_manage',	'\\app\\common\\driver\\login\\CookieLogin',	'radio',	'登录驱动',	'后台',	'\\app\\common\\driver\\login\\CookieLogin:Cookie驱动|\\app\\common\\driver\\login\\SessionLogin:Session驱动',	52,	'',	1474421089,	1474537762),
+(16,	'public_action_manage',	'[\"manage.start.*\",\"index.index.*\"]',	'array',	'公共行为',	'后台',	'',	53,	'',	1474434515,	1474537762),
 (17,	'site_title',	'NewdayCms - 哩呵后台管理系统',	'text',	'网站标题',	'网站',	'',	100,	'',	1469798091,	1474534155),
 (18,	'site_version',	'20160921',	'text',	'网站版本',	'网站',	'',	101,	'',	1474127435,	1474534155),
 (19,	'site_compress',	'1',	'radio',	'HTML压缩',	'网站',	'0:不压缩|1:压缩',	102,	'',	1474174078,	1474534155),
@@ -76,7 +76,8 @@ INSERT INTO `nd_manage_config` (`id`, `config_name`, `config_value`, `config_typ
 (24,	'upload_driver',	'\\app\\common\\driver\\upload\\LocalUpload',	'radio',	'上传驱动',	'上传',	'\\app\\common\\driver\\upload\\UpyunUpload:又拍云|\\app\\common\\driver\\upload\\LocalUpload:本地',	200,	'',	1474174215,	1474476452),
 (25,	'upload_type',	'{\"image\":[\"jpg\",\"png\",\"gif\",\"bmp\"],\"audio\":[\"mp3\",\"ogg\",\"m4a\",\"wav\",\"ape\",\"flac\"],\"video\":[\"mp4\",\"mov\",\"mpg\",\"flv\",\"mkv\",\"avi\"],\"compress\":[\"zip\",\"rar\",\"7z\"],\"document\":[\"doc\",\"xls\",\"ppt\",\"docx\",\"xlsx\",\"pptx\",\"pdf\"]}',	'array',	'上传类型',	'上传',	'image,audio,video,compress,document',	201,	'',	1474174295,	1474476452),
 (26,	'local_config',	'{\"local_root\":\"{WEB_PATH}\\/upload\\/\",\"local_url\":\"http:\\/\\/cms.newday.me\\/upload\\/\"}',	'array',	'本地配置',	'上传',	'local_root,local_url',	202,	'',	1474174580,	1474476452),
-(27,	'upyun_config',	'{\r\n    \"upyun_bucket\": \"newday-static\",\r\n    \"upyun_user\": \"\",\r\n    \"upyun_pass\": \"\",\r\n    \"upyun_root\": \"/upload/\",\r\n    \"upyun_url\": \"http://static.newday.me/upload/\",\r\n    \"upyun_key\": \"\",\r\n    \"upyun_size\": 2,\r\n    \"upyun_maxsize\": 3,\r\n    \"upyun_return\": \"\",\r\n    \"upyun_notify\": \"\"\r\n}',	'array',	'又拍云配置',	'上传',	'upyun_bucket,upyun_user,upyun_pass,upyun_root,upyun_url,upyun_key,upyun_size,upyun_maxsize,upyun_return,upyun_notify',	203,	'',	1474174375,	1474476452);
+(27,	'upyun_config',	'{\r\n    \"upyun_bucket\": \"newday-static\",\r\n    \"upyun_user\": \"\",\r\n    \"upyun_pass\": \"\",\r\n    \"upyun_root\": \"/upload/\",\r\n    \"upyun_url\": \"http://static.newday.me/upload/\",\r\n    \"upyun_key\": \"\",\r\n    \"upyun_size\": 2,\r\n    \"upyun_maxsize\": 3,\r\n    \"upyun_return\": \"\",\r\n    \"upyun_notify\": \"\"\r\n}',	'array',	'又拍云配置',	'上传',	'upyun_bucket,upyun_user,upyun_pass,upyun_root,upyun_url,upyun_key,upyun_size,upyun_maxsize,upyun_return,upyun_notify',	203,	'',	1474174375,	1474476452),
+(28,	'verify_code_manage',	'0',	'radio',	'开启验证码',	'后台',	'0:关闭|1:开启',	50,	'',	1474537662,	1474537762);
 
 
 -- --------------------------------------------------------
@@ -134,8 +135,8 @@ CREATE TABLE `nd_manage_member` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 INSERT INTO `nd_manage_member` (`id`, `user_name`, `user_passwd`, `user_nick`, `group_id`, `user_status`, `login_time`, `login_ip`, `login_count`, `create_time`, `update_time`) VALUES
-(1,	'admin',	'88508ca442ed2483821f46190e86b2b1',	'管理员',	1,	1,	1474534131,	'127.0.0.1',	6,	1469798091,	1474534131),
-(2,	'demo',	'88508ca442ed2483821f46190e86b2b1',	'游客',	3,	1,	1474505760,	'127.0.0.1',	2,	1474475386,	1474505760);
+(1,	'admin',	'88508ca442ed2483821f46190e86b2b1',	'管理员',	1,	1,	1474538268,	'127.0.0.1',	8,	1469798091,	1474538268),
+(2,	'demo',	'88508ca442ed2483821f46190e86b2b1',	'游客',	3,	1,	1474538234,	'127.0.0.1',	3,	1474475386,	1474538234);
 
 
 -- --------------------------------------------------------

@@ -152,7 +152,7 @@ class Config extends Base
         $value = $request->param('value', '');
         ConfigLogic::modifyConfig($id, $field, $value);
         
-        return $this->success('更改成功', Url::build('config/index'));
+        return $this->success('更改成功', 'history.go(0);');
     }
 
     /**

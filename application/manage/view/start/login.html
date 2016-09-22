@@ -11,14 +11,15 @@
 
 			<div class="am-form-group am-form-icon">
 				<i class="am-icon-user am-icon-fw"></i>
-				<input type="text" class="am-form-field am-round" name="user_name" placeholder="用户名">
+				<input type="text" class="am-form-field am-round" name="user_name" value="demo" placeholder="用户名">
 			</div>
 
 			<div class="am-form-group am-form-icon">
 				<i class="am-icon-key am-icon-fw"></i>
-				<input type="password" class="am-form-field am-round" name="user_passwd" placeholder="密码">
+				<input type="password" class="am-form-field am-round" name="user_passwd" value="123456" id="user_passwd" placeholder="密码">
 			</div>
 
+			{if condition="!empty($verify_code_manage)"}
 			<div class="am-form-group am-form-icon">
 				<i class="am-icon-eye am-icon-fw"></i>
 				<input type="text" class="am-form-field am-round" name="verify_code" id="verify_code" placeholder="验证码">
@@ -32,6 +33,7 @@
 					<a href="javascript:void(0)" class="login-code-change">看不清？换一张</a>
 				</div>
 			</div>
+			{/if}
 
 			<div class="login-btn">
 				<a class="am-btn am-btn-primary am-btn-block am-round ajax-post" target-form="login-form">立即登录</a>
