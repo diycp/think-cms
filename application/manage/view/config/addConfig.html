@@ -8,7 +8,7 @@
 				<div class="am-u-sm-4 am-u-md-2 am-text-right">
 					配置名称
 				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
 					<input type="text" class="am-input-sm" name="config_name" />
 				</div>
 			</div>
@@ -16,34 +16,20 @@
 				<div class="am-u-sm-4 am-u-md-2 am-text-right">
 					配置标题
 				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
 					<input type="text" class="am-input-sm" name="config_title" />
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置分组
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="config_group" />
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置排序
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="config_sort" value="0" />
 				</div>
 			</div>
 			<div class="am-g am-margin-top-sm">
 				<div class="am-u-sm-4 am-u-md-2 am-text-right">
 					配置类型
 				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
 					<select name="config_type" data-am-selected="{btnSize: 'sm'}">
 						<option value="text">文本</option>
 						<option value="textarea">文本域</option>
+						<option value="date">日期</option>
+						<option value="color">颜色</option>
 						<option value="image">图片</option>
 						<option value="file">文件</option>
 						<option value="checkbox">多选</option>
@@ -53,11 +39,28 @@
 					</select>
 				</div>
 			</div>
+			
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					配置分组
+				</div>
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
+					<input type="text" class="am-input-sm" name="config_group" style="border-right: none;"; />
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					配置排序
+				</div>
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
+					<input type="text" class="am-input-sm" name="config_sort" value="0" />
+				</div>
+			</div>
 			<div class="am-g am-margin-top-sm">
 				<div class="am-u-sm-4 am-u-md-2 am-text-right">
 					额外配置
 				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
 					<textarea name="config_extra" rows="5" ></textarea>
 				</div>
 			</div>
@@ -65,7 +68,7 @@
 				<div class="am-u-sm-4 am-u-md-2 am-text-right">
 					配置说明
 				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+				<div class="am-u-sm-8 am-u-md-5 am-u-end">
 					<textarea name="config_remark" rows="5" ></textarea>
 				</div>
 			</div>

@@ -40,15 +40,22 @@
 <script type="text/javascript" src="{$lib_path}/amazeui/2.7.1/js/amazeui.min.js?_={$site_version}"></script>
 <script type="text/javascript" src="{$lib_path}/alertifyjs/1.8.0/alertify.min.js?_={$site_version}"></script>
 <script type="text/javascript" src="{$lib_path}/icheck/1.0.2/icheck.min.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/colorPicker/1.0/colors.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/colorPicker/1.0/colorPicker.data.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/colorPicker/1.0/colorPicker.js?_={$site_version}"></script>
+<script type="text/javascript" src="{$lib_path}/colorPicker/1.0/jqColor.js?_={$site_version}"></script>
 <script type="text/javascript" src="{$lib_path}/require/2.3.1/require.min.js?_={$site_version}"></script>
-<script type="text/javascript" src="{$module_path}/common/common.js?_={$site_version}"></script>
 <script type="text/javascript" >
+var baseApi = {
+	'upload' : '{:url("upload/upload")}',
+};
 require.config({
 	paths: {
 		"ace" : "{$lib_path}/ace/1.2.5/lib/ace"
 	}
 });
 </script>
+<script type="text/javascript" src="{$module_path}/common/common.js?_={$site_version}"></script>
 {block name="script"}{/block}
 <div class="am-hide">
 	<script src="http://s11.cnzz.com/z_stat.php?id=1260438438&web_id=1260438438" language="JavaScript"></script>

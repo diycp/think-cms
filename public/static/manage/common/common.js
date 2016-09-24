@@ -1,3 +1,8 @@
+/**
+ * 哈哈哈，后面果断要模块化
+ * 嗯，先凑合用着
+ */
+
 // common_alert
 window.alert = window.commonAlert = function(text, code) {
 	if(code == 1) {
@@ -130,6 +135,53 @@ window.ajaxDone = function() {
 	$('.ajax-disabled').removeClass('ajax-disabled');
 };
 
+// upload_file
+window.uploadFile = function(option) {
+	var form_data = new FormData();
+	form_data.append('upload_option', option.option);
+	form_data.append('upload_file', option.file);
+	var ajax_option = {
+		url: baseApi.upload,
+		type: 'post',
+		data: form_data,
+		dataType: 'json',
+		timeout: 0,
+		processData: false,
+		contentType: false,
+		xhr: function() {
+			var xhr = $.ajaxSettings.xhr();
+			xhr.upload.onprogress = function(event) {
+				var percent = 0,
+					position = event.loaded || event.position,
+					total = event.total;
+				if(event.lengthComputable) {
+					percent = position / total * 100;
+				}
+				if(percent > 100) {
+					percent = 100;
+				}
+				option.progress && option.progress(position, total, percent.toFixed(2));
+			};
+			return xhr;
+		},
+		complete: function() {
+			option.complete && option.complete();
+		},
+		success: function(res) {
+			option.success && option.success(res);
+		},
+		error: function(xhr) {
+			option.error && option.error(xhr, '网络链接错误');
+		}
+	};
+	window.uploadObject = $.ajax(ajax_option);
+};
+
+// upload_cancel
+window.uploadCancel = function() {
+	window.uploadObject && window.uploadObject.abort();
+};
+
 $(function() {
 
 	// nd_refresh
@@ -157,6 +209,9 @@ $(function() {
 		increaseArea: '20%'
 	});
 
+	// nd_color
+	$('.nd-color').colorPicker();
+
 	// nd_input
 	$('.nd-input').on('change', function() {
 		var url = $(this).attr('url'),
@@ -173,6 +228,56 @@ $(function() {
 		}
 	});
 
+	// nd_upload
+	$('.nd-upload-file').on('change', function() {
+		var $this = $(this),
+			target = $this.attr('target'),
+			$target_input,
+			preview = $this.attr('preview'),
+			$preview_div,
+			upload_file = $this.get(0).files[0],
+			$upload_span = $($this.parent().find('span')[0]);
+
+		if(typeof upload_file == 'undefined') {
+			return false;
+		}
+
+		if(target) {
+			$target_input = $('#' + target);
+		}
+
+		if(preview) {
+			$preview_div = $('#' + preview);
+		}
+
+		var option = {
+			file: upload_file,
+			progress: function(position, total, percent) {
+				$.AMUI.progress.set(percent);
+				$upload_span && $upload_span.html('<span class="am-text-warning">' + percent + '%</span>');
+			},
+			complete: function() {
+				setTimeout(function() {
+					$upload_span && $upload_span.html('选择文件');
+				}, 3000);
+			},
+			success: function(res) {
+				$.AMUI.progress.done();
+				if(res.code == 1) {
+					$target_input && $target_input.val(res.data.url);
+					$preview_div && $preview_div.css('background-image', 'url(' + res.data.url + ')');
+				} else {
+					$upload_span && $upload_span.html('<span class="am-text-danger">' + res.msg + '</span>');
+				}
+			},
+			error: function(xhr, info) {
+				$.AMUI.progress.done();
+				$upload_span && $upload_span.html('<span class="am-text-danger">' + info + '</span>');
+			}
+		};
+		uploadFile(option);
+	});
+
 	// nd_editor_ace
 	$('.nd-editor-ace').each(function() {
 		var $this = $(this),
@@ -187,7 +292,7 @@ $(function() {
 
 		var $pre = $('<pre id="' + target + '">' + value + '</pre>');
 		$pre.insertAfter($this);
-		
+
 		require(['ace/ace'], function(ace) {
 			var editor = ace.edit(target);
 			editor.session.setMode('ace/mode/' + type);

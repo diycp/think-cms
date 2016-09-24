@@ -22,6 +22,25 @@
 			</div>
 			<div class="am-g am-margin-top-sm">
 				<div class="am-u-sm-4 am-u-md-2 am-text-right">
+					配置类型
+				</div>
+				<div class="am-u-sm-8 am-u-md-4 am-u-end">
+					<select name="config_type" data-am-selected="{btnSize: 'sm'}">
+						<option {eq name="config.config_type" value="text"}selected{/eq} value="text">文本</option>
+						<option {eq name="config.config_type" value="textarea"}selected{/eq} value="textarea">文本域</option>
+						<option {eq name="config.config_type" value="date"}selected{/eq} value="date">日期</option>
+						<option {eq name="config.config_type" value="color"}selected{/eq} value="color">颜色</option>
+						<option {eq name="config.config_type" value="image"}selected{/eq} value="image">图片</option>
+						<option {eq name="config.config_type" value="file"}selected{/eq} value="file">文件</option>
+						<option {eq name="config.config_type" value="checkbox"}selected{/eq} value="checkbox">多选</option>
+						<option {eq name="config.config_type" value="radio"}selected{/eq} value="radio">单选</option>
+						<option {eq name="config.config_type" value="select"}selected{/eq} value="select">下拉</option>
+						<option {eq name="config.config_type" value="array"}selected{/eq} value="array">数组</option>
+					</select>
+				</div>
+			</div>
+			<div class="am-g am-margin-top-sm">
+				<div class="am-u-sm-4 am-u-md-2 am-text-right">
 					配置分组
 				</div>
 				<div class="am-u-sm-8 am-u-md-4 am-u-end">
@@ -34,23 +53,6 @@
 				</div>
 				<div class="am-u-sm-8 am-u-md-4 am-u-end">
 					<input type="text" class="am-input-sm" name="config_sort" value="{$config.config_sort}" />
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置类型
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<select name="config_type" data-am-selected="{btnSize: 'sm'}">
-						<option {eq name="config.config_type" value="text"}selected{/eq} value="text">文本</option>
-						<option {eq name="config.config_type" value="textarea"}selected{/eq} value="textarea">文本域</option>
-						<option {eq name="config.config_type" value="image"}selected{/eq} value="image">图片</option>
-						<option {eq name="config.config_type" value="file"}selected{/eq} value="file">文件</option>
-						<option {eq name="config.config_type" value="checkbox"}selected{/eq} value="checkbox">多选</option>
-						<option {eq name="config.config_type" value="radio"}selected{/eq} value="radio">单选</option>
-						<option {eq name="config.config_type" value="select"}selected{/eq} value="select">下拉</option>
-						<option {eq name="config.config_type" value="array"}selected{/eq} value="array">数组</option>
-					</select>
 				</div>
 			</div>
 			<div class="am-g am-margin-top-sm">
