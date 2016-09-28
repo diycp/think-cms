@@ -55,7 +55,17 @@ class Member extends Base
             $this->site_title = '新增用户';
             
             $member_group = MemberGroupModel::select();
+            foreach ($member_group as &$vo) {
+                $vo = [
+                    'name' => $vo['group_name'],
+                    'value' => $vo['id']
+                ];
+            }
+            unset($vo);
             $this->assign('member_group', $member_group);
+            
+            $user_status = $this->getStatus();
+            $this->assign('user_status', $user_status);
             
             return $this->fetch();
         }
@@ -99,7 +109,17 @@ class Member extends Base
             $this->assign('member', $member);
             
             $member_group = MemberGroupModel::select();
+            foreach ($member_group as &$vo) {
+                $vo = [
+                    'name' => $vo['group_name'],
+                    'value' => $vo['id']
+                ];
+            }
+            unset($vo);
             $this->assign('member_group', $member_group);
+            
+            $user_status = $this->getStatus();
+            $this->assign('user_status', $user_status);
             
             return $this->fetch();
         }
@@ -122,7 +142,7 @@ class Member extends Base
         
         // 删除用户
         MemberModel::del($user_id);
-        return $this->success('删除用户成功');
+        return $this->success('删除用户成功', Url::build('member/index'));
     }
 
     /**
@@ -148,5 +168,22 @@ class Member extends Base
         MemberModel::modify($id, $field, $value);
         
         return $this->success('更改成功', Url::build('member/index'));
+    }
+
+    /**
+     * 状态
+     */
+    protected function getStatus()
+    {
+        return [
+            [
+                'name' => '启用',
+                'value' => 1
+            ],
+            [
+                'name' => '禁用',
+                'value' => 0
+            ]
+        ];
     }
 }

@@ -127,7 +127,7 @@ class Base
             
             $this->assign('jump', $jump);
             
-            return $this->fetch('common/jump');
+            return $this->fetch('manage@common/jump');
         }
     }
 

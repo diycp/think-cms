@@ -1,6 +1,7 @@
 <?php
 namespace app\common\logic\manage;
 
+use think\Url;
 use app\common\logic\BaseLogic;
 use app\common\model\manage\MenuModel;
 use app\common\logic\common\CommonLogic;
@@ -8,6 +9,32 @@ use app\common\logic\manage\MemberLogic;
 
 class MenuLogic extends BaseLogic
 {
+
+    /**
+     * 菜单选择
+     */
+    public static function getMenuSelect()
+    {
+        $menu_tree = self::getMenuTree();
+        $menu_select = [];
+        $menu_select[] = [
+            'name' => '无',
+            'value' => 0
+        ];
+        foreach ($menu_tree['main_menu'] as $vo) {
+            $menu_select[] = [
+                'name' => $vo['menu_name'],
+                'value' => $vo['menu_id']
+            ];
+            foreach ($menu_tree['sub_menu'][$vo['menu_id']] as $ko) {
+                $menu_select[] = [
+                    'name' => '--' . $ko['menu_name'],
+                    'value' => $ko['menu_id']
+                ];
+            }
+        }
+        return $menu_select;
+    }
 
     /**
      * 菜单树
@@ -124,6 +151,13 @@ class MenuLogic extends BaseLogic
         
         $main_menu = self::getMenuByPid(0, $user_id);
         foreach ($main_menu as &$menu) {
+            
+            // 菜单权限
+            $menu_url = self::getMainMenuUrl($menu['menu_id'], $user_id);
+            if (! is_null($menu_url)) {
+                $menu['menu_url'] = $menu_url;
+            }
+            
             if ($current_menu && $menu['menu_id'] == $current_menu['menu_pid']) {
                 $menu['menu_active'] = 1;
             } else {
@@ -133,6 +167,28 @@ class MenuLogic extends BaseLogic
         unset($menu);
         
         return $main_menu;
+    }
+
+    /**
+     * 主菜单链接
+     */
+    public static function getMainMenuUrl($menu_id, $user_id)
+    {
+        $auth_menu = MemberLogic::getAuthMenu($user_id);
+        if (in_array($menu_id, $auth_menu)) {
+            return null;
+        }
+        
+        $map = array(
+            'menu_status' => 1,
+            'menu_pid' => $menu_id,
+            'id' => [
+                'in',
+                $auth_menu
+            ]
+        );
+        $menu = MenuModel::where($map)->order('menu_sort asc')->find();
+        return $menu ? Url::build($menu['menu_url']) : '';
     }
 
     /**
@@ -234,7 +290,7 @@ class MenuLogic extends BaseLogic
         return array(
             'menu_id' => $item['id'],
             'menu_name' => $item['menu_name'],
-            'menu_url' => url($item['menu_url'])
+            'menu_url' => Url::build($item['menu_url'])
         );
     }
 
@@ -243,17 +299,18 @@ class MenuLogic extends BaseLogic
      */
     public static function getMenuRule($url)
     {
-        // 当前url
-        $url = url($url);
         
         // 当前路径
-        $path = CommonLogic::getWebPath();
+        $action_test = 'path/test/domain';
+        $path = str_replace($action_test . '.html', '', Url::build($action_test));
         
         // 相对url
-        list ($url_relative, $temp) = explode('.', $url);
-        $url_relative = str_replace_once($path, '', $url_relative);
+        $url = Url::build($url);
+        $url_relative = str_replace([
+            $path,
+            '.html'
+        ], '', $url);
         
-        // 获取rule
         $arr = explode('/', $url_relative);
         $arr = array_slice($arr, 0, 3);
         $flag = implode('/', $arr);

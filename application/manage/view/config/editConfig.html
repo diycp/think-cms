@@ -3,85 +3,24 @@
 {block name="admin-content"}
 <div class="am-g">
 	<div class="am-u-sm-12">
-		<form class="am-form config-form" method="post" action="{:url('editConfig', ['config_id' => $config_id])}">
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置名称
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="config_name" value="{$config.config_name}"/>
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置标题
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="config_title" value="{$config.config_title}"/>
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置类型
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<select name="config_type" data-am-selected="{btnSize: 'sm'}">
-						<option {eq name="config.config_type" value="text"}selected{/eq} value="text">文本</option>
-						<option {eq name="config.config_type" value="textarea"}selected{/eq} value="textarea">文本域</option>
-						<option {eq name="config.config_type" value="date"}selected{/eq} value="date">日期</option>
-						<option {eq name="config.config_type" value="color"}selected{/eq} value="color">颜色</option>
-						<option {eq name="config.config_type" value="image"}selected{/eq} value="image">图片</option>
-						<option {eq name="config.config_type" value="file"}selected{/eq} value="file">文件</option>
-						<option {eq name="config.config_type" value="checkbox"}selected{/eq} value="checkbox">多选</option>
-						<option {eq name="config.config_type" value="radio"}selected{/eq} value="radio">单选</option>
-						<option {eq name="config.config_type" value="select"}selected{/eq} value="select">下拉</option>
-						<option {eq name="config.config_type" value="array"}selected{/eq} value="array">数组</option>
-					</select>
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置分组
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="config_group" value="{$config.config_group}"/>
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置排序
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="config_sort" value="{$config.config_sort}" />
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					额外配置
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<textarea name="config_extra" rows="5" >{$config.config_extra}</textarea>
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					配置说明
-				</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<textarea name="config_remark" rows="5" >{$config.config_remark}</textarea>
-				</div>
-			</div>
+		<form class="am-form ajax-form" method="post" action="{:url('editConfig', ['config_id' => $config_id])}">
+		
+			{:block('text', ['title' => '配置名称', 'name' => 'config_name', 'value' => $config['config_name']])}
 			
-			<div class="am-g am-margin-top">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">
-					用户操作
-				</div>
-				<div class="am-u-sm-8 am-u-md-10">
-					<button type="button" class="am-btn am-btn-sm am-btn-primary ajax-post" target-form="config-form" >保存配置</button>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" class="am-btn am-btn-sm am-btn-default nd-backward">取消操作</button>
-				</div>
-			</div>
+			{:block('text', ['title' => '配置标题', 'name' => 'config_title', 'value' => $config['config_title']])}
+			
+			{:block('select', ['title' => '配置类型', 'name' => 'config_type', 'value' => $config['config_type'], 'list' => $config_type])}
+			
+			{:block('text', ['title' => '配置分组', 'name' => 'config_group', 'value' => $config['config_group']])}
+			
+			{:block('text', ['title' => '配置排序', 'name' => 'config_sort', 'value' => $config['config_sort']])}
+			
+			{:block('textarea', ['title' => '额外配置', 'name' => 'config_extra', 'value' => $config['config_extra']])}
+			
+			{:block('textarea', ['title' => '配置说明', 'name' => 'config_remark', 'value' => $config['config_remark']])}
+			
+			{:block('submit', ['title' => '用户操作'])}
+			
 		</form>
 	</div>
 </div>

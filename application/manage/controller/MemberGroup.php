@@ -50,6 +50,18 @@ class MemberGroup extends Base
         } else {
             $this->site_title = '新增群组';
             
+            $group_status = [
+                [
+                    'name' => '启用',
+                    'value' => 1
+                ],
+                [
+                    'name' => '禁用',
+                    'value' => 0
+                ]
+            ];
+            $this->assign('group_status', $group_status);
+            
             return $this->fetch();
         }
     }
@@ -88,6 +100,18 @@ class MemberGroup extends Base
             
             $group = MemberGroupModel::get($group_id);
             $this->assign('group', $group);
+            
+            $group_status = [
+                [
+                    'name' => '启用',
+                    'value' => 1
+                ],
+                [
+                    'name' => '禁用',
+                    'value' => 0
+                ]
+            ];
+            $this->assign('group_status', $group_status);
             
             return $this->fetch();
         }
@@ -142,7 +166,7 @@ class MemberGroup extends Base
         
         // 删除菜单
         MemberGroupModel::del($group_id);
-        return $this->success('删除群组成功', Url::build('memberGroup/index'));
+        return $this->success('删除群组成功', 'history.go(0);');
     }
 
     /**
@@ -166,6 +190,6 @@ class MemberGroup extends Base
         $value = $request->param('value', '');
         MemberGroupModel::modify($id, $field, $value);
         
-        return $this->success('更改成功', Url::build('memberGroup/index'));
+        return $this->success('更改成功', 'history.go(0);');
     }
 }

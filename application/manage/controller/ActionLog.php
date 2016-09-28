@@ -22,7 +22,7 @@ class ActionLog extends Base
         if (! empty($uid)) {
             $map['log_uid'] = $uid;
         }
-        $this->assign('uid', $uid);
+        $this->assign('uid', intval($uid));
         
         // start_time
         $start_time = $request->param('start_time', '');
@@ -55,7 +55,10 @@ class ActionLog extends Base
         // method
         $method = $request->param('method', '');
         if (! empty($method)) {
-            $map['log_method'] = $method;
+            $map['log_method'] = [
+                'like',
+                '%' . $method . '%'
+            ];
         }
         $this->assign('method', $method);
         
@@ -85,17 +88,25 @@ class ActionLog extends Base
             ->select();
         foreach ($uid_list as &$vo) {
             if (isset($user_list[$vo['log_uid']])) {
-                $vo['log_user_name'] = $user_list[$vo['log_uid']]['user_name'];
+                $vo = [
+                    'name' => $user_list[$vo['log_uid']]['user_name'],
+                    'value' => $vo['log_uid']
+                ];
             } else {
-                $vo['log_user_name'] = 'unknown';
+                $vo = [
+                    'name' => 'unknown',
+                    'value' => $vo['log_uid']
+                ];
             }
         }
         unset($vo);
         $this->assign('uid_list', $uid_list);
         
+        // total_count
         $total_count = ActionLogModel::where($map)->count();
         $this->assign('total_count', $total_count);
         
+        // list
         $list = ActionLogModel::where($map)->order('id desc')->paginate(10);
         $list_new = [];
         foreach ($list as $vo) {

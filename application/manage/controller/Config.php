@@ -26,9 +26,11 @@ class Config extends Base
         }
         $this->assign('group', $group_name);
         
+        // total_count
         $total_count = ConfigModel::where($map)->count();
         $this->assign('total_count', $total_count);
         
+        // list
         $list = ConfigModel::where($map)->order('config_sort asc')->paginate(10);
         $this->assign('list', $list);
         $this->assign('page', $list->render());
@@ -47,6 +49,9 @@ class Config extends Base
      */
     public function addConfig(Request $request)
     {
+        $config_type = ConfigLogic::getConfigType();
+        $this->assign('config_type', $config_type);
+        
         if ($request->isPost()) {
             $data = [
                 'config_name' => $request->param('config_name'),
@@ -83,6 +88,9 @@ class Config extends Base
         if (empty($config_id)) {
             return $this->error('配置ID为空');
         }
+        
+        $config_type = ConfigLogic::getConfigType();
+        $this->assign('config_type', $config_type);
         
         if ($request->isPost()) {
             $data = [
@@ -127,7 +135,7 @@ class Config extends Base
         
         // 删除菜单
         ConfigLogic::delConfig($config_id);
-        return $this->success('删除配置成功', Url::build('config/index'));
+        return $this->success('删除配置成功', 'history.go(0);');
     }
 
     /**

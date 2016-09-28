@@ -18,142 +18,41 @@
 					{volist name="vo.list" id="ko"}
 						{switch name="ko.config_type"}
 						    {case value="text"}
-							    <div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<input type="text" class="am-input-sm" name="config[{$ko.config_name}]" value="{$ko.config_value}" />
-									</div>
-								</div>
+						    	{:block('text', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
 							{/case}
 						    {case value="textarea"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<textarea name="config[{$ko.config_name}]" rows="5" >{$ko.config_value}</textarea>
-									</div>
-								</div>
+						    	{:block('textarea', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
+							{/case}
+							{case value="tag"}
+								{:block('tag', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
 							{/case}
 							{case value="date"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: '{$ko.config_extra}'}">
-											<input type="text" class="am-form-field" name="config[{$ko.config_name}]" value="{$ko.config_value}">
-											<span class="am-input-group-btn am-datepicker-add-on">
-											<button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span></button>
-											</span>
-										</div>
-									</div>
-								</div>
+								{:block('date', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value'], 'format' => $ko['config_extra']])}
 							{/case}
 							{case value="color"}
-							    <div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<input type="text" class="am-input-sm nd-color" name="config[{$ko.config_name}]" value="{$ko.config_value}" />
-									</div>
-								</div>
+								{:block('color', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
 							{/case}
 							{case value="image"}
-							<div class="am-g am-margin-top-sm">
-								<div class="am-u-sm-4 am-u-md-2 am-text-right">
-									{$ko.config_title}
-								</div>
-								<div class="am-u-sm-8 am-u-md-5 am-u-end">
-									<input type="hidden" name="config[{$ko.config_name}]" value="{$ko.config_value}" id="upload_file_{$ko.id}" />
-									<div class="am-form-group am-form-file am-text-center nd-input-image-area" style="background-image: url('{$ko.config_value}')" id="preview_div_{$ko.id}">
-										<button type="button" class="am-btn am-btn-default am-btn-sm">
-											<i class="am-icon-cloud-upload"></i> 
-											<span>选择文件</span>
-										</button>
-										<input type="file" class="nd-upload-file" target="upload_file_{$ko.id}" preview="preview_div_{$ko.id}">
-									</div>
-								</div>
-							</div>
+								{:block('image', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
 							{/case}
 							{case value="file"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<div class="am-input-group nd-input-file-area">
-											<input type="text" class="am-input-sm" name="config[{$ko.config_name}]" value="{$ko.config_value}" id="upload_file_{$ko.id}" />
-											<span class="am-input-group-btn">
-												<div class="am-form-group am-form-file">
-													<button type="button" class="am-btn am-btn-sm am-btn-default">
-														<i class="am-icon-cloud-upload"></i> 
-														<span>选择文件</span>
-													</button>
-													<input type="file" class="nd-upload-file" target="upload_file_{$ko.id}"  />
-												</div>
-											</span>
-										</div>
-									</div>
-								</div>
+								{:block('file', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
 							{/case}
 							{case value="radio"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										{volist name="ko.config_extra" id="mo"}
-										<label class="am-radio-inline am-secondary">
-											<input {eq name="ko.config_value" value="$mo.value"}checked{/eq} type="radio" name="config[{$ko.config_name}]" value="{$mo.value}" data-am-ucheck /> {$mo.name}
-										</label>
-										{/volist}
-									</div>
-								</div>
+								{:block('radio', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value'], 'list' => $ko['config_extra']])}
 							{/case}
 							{case value="checkbox"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										{volist name="ko.config_extra" id="mo"}
-										<label class="am-checkbox-inline am-secondary">
-											<input {eq name="ko.config_value" value="$mo.value"}checked{/eq} type="checkbox" name="config[{$ko.config_name}][]" value="{$mo.value}" data-am-ucheck> {$mo.name}
-										</label>
-										{/volist}
-									</div>
-								</div>
+						    	{:block('checkbox', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value'], 'list' => $ko['config_extra']])}
 							{/case}
 							{case value="select"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<select name="config[{$ko.config_name}]" data-am-selected="{btnSize: 'sm'}">
-										{volist name="ko.config_extra" id="mo"}
-											<option {eq name="ko.config_value" value="$mo.value"}selected{/eq} value="{$mo.value}">{$mo.name}</option>
-										{/volist}
-										</select>
-									</div>
-								</div>
+						    	{:block('select', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value'], 'list' => $ko['config_extra']])}
 							{/case}
 							{case value="array"}
-						    	<div class="am-g am-margin-top-sm">
-									<div class="am-u-sm-4 am-u-md-2 am-text-right">
-										{$ko.config_title}
-									</div>
-									<div class="am-u-sm-8 am-u-md-5 am-u-end">
-										<textarea class="nd-editor-ace am-hide" nd-type="json" nd-target="nd-editor-ace-{$ko.id}" name="config[{$ko.config_name}]" rows="5" >{$ko.config_value}</textarea>
-									</div>
-								</div>
+								{:block('array', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
 							{/case}
-						    {default /}
-						    
+							{case value="editor"}
+								{:block('editor', ['title' => $ko['config_title'], 'name' => 'config['.$ko['config_name'].']', 'value' => $ko['config_value']])}
+							{/case}
 						{/switch}
 					{/volist}
 						<div class="am-g am-margin-top">

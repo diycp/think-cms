@@ -3,34 +3,16 @@
 {block name="admin-content"}
 <div class="am-g">
 	<div class="am-u-sm-12">
-		<form class="am-form account-form" method="post" action="{:url('saveAccount')}">
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">账号昵称</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="text" class="am-input-sm" name="user_nick" value="{$site_user.user_nick}" />
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">新的密码</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="password" class="am-input-sm" name="user_passwd" />
-					（不修改密码请留空）
-				</div>
-			</div>
-			<div class="am-g am-margin-top-sm">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">重复密码</div>
-				<div class="am-u-sm-8 am-u-md-4 am-u-end">
-					<input type="password" class="am-input-sm" name="re_passwd" />
-				</div>
-			</div>
-			<div class="am-g am-margin-top">
-				<div class="am-u-sm-4 am-u-md-2 am-text-right">用户操作</div>
-				<div class="am-u-sm-8 am-u-md-10">
-					<button type="button" class="am-btn am-btn-sm am-btn-primary ajax-post" target-form="account-form">保存用户</button>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" class="am-btn am-btn-sm am-btn-default nd-backward">取消操作</button>
-				</div>
-			</div>
+		<form class="am-form ajax-form" method="post" action="{:url('saveAccount')}">
+		
+			{:block('text', ['title' => '账号昵称', 'name' => 'user_nick', 'value' => $site_user['user_nick']])}
+			
+			{:block('text', ['title' => '新的密码', 'type' => 'password','name' => 'user_passwd', 'tip' => '不修改密码请留空'])}
+			
+			{:block('text', ['title' => '新的密码', 'type' => 'password','name' => 're_passwd'])}
+			
+			{:block('submit', ['title' => '用户操作'])}
+			
 		</form>
 	</div>
 </div>

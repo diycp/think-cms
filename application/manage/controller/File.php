@@ -64,9 +64,11 @@ class File extends Base
         }
         $this->assign('keyword', $keyword);
         
+        // total_count
         $total_count = FileModel::where($map)->count();
         $this->assign('total_count', $total_count);
         
+        // list
         $list = FileModel::where($map)->order('id desc')->paginate(10);
         $res = array();
         foreach ($list as $vo) {
@@ -78,7 +80,14 @@ class File extends Base
         
         // 上传类型
         $upload_type = Config::get('upload_type');
-        $this->assign('upload_type', $upload_type);
+        $upload_type_list = [];
+        foreach($upload_type as $co=>$vo){
+            $upload_type_list[] = [
+                'name' => $co,
+                'value' => $co
+            ];
+        }
+        $this->assign('upload_type_list', $upload_type_list);
         
         return $this->fetch();
     }

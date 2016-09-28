@@ -166,12 +166,18 @@
 
 .admin-warpper .admin-content .admin-area {
 	position: fixed;
+	padding-bottom: 2rem;
 	top: 4rem;
 	bottom: 0;
 	left: 16rem;
 	right: 0;
 	overflow-x: hidden;
 	overflow-y: auto;
+}
+
+.admin-warpper .admin-content .admin-area.admin-fullscreen{
+	overflow-x: visible;
+	overflow-y: visible;
 }
 
 .admin-warpper .admin-content .admin-area .admin-pagination {
@@ -202,4 +208,13 @@
 	border-radius: 2rem;
 	border: none;
 	background: rgba(200, 200, 200, 0.5);
+}
+
+.tag-editor {
+	line-height: 2rem;
+	border: 1px solid #ccc;
+}
+
+.tag-editor input {
+	height: 2rem;
 }

@@ -212,6 +212,9 @@ $(function() {
 	// nd_color
 	$('.nd-color').colorPicker();
 
+	// nd_tag
+	$('.nd-tag').tagEditor();
+
 	// nd_input
 	$('.nd-input').on('change', function() {
 		var url = $(this).attr('url'),
@@ -253,7 +256,6 @@ $(function() {
 		var option = {
 			file: upload_file,
 			progress: function(position, total, percent) {
-				$.AMUI.progress.set(percent);
 				$upload_span && $upload_span.html('<span class="am-text-warning">' + percent + '%</span>');
 			},
 			complete: function() {
@@ -262,7 +264,6 @@ $(function() {
 				}, 3000);
 			},
 			success: function(res) {
-				$.AMUI.progress.done();
 				if(res.code == 1) {
 					$target_input && $target_input.val(res.data.url);
 					$preview_div && $preview_div.css('background-image', 'url(' + res.data.url + ')');
@@ -271,7 +272,6 @@ $(function() {
 				}
 			},
 			error: function(xhr, info) {
-				$.AMUI.progress.done();
 				$upload_span && $upload_span.html('<span class="am-text-danger">' + info + '</span>');
 			}
 		};
@@ -299,11 +299,82 @@ $(function() {
 
 			editor.getSession().setUseWrapMode(true);
 			editor.setAutoScrollEditorIntoView(true);
+			editor.setOption("minLines", 10);
 			editor.setOption("maxLines", 15);
 
 			editor.getSession().on('change', function(e) {
 				$this.html(editor.getValue());
 			});
+		});
+	});
+
+	// nd_editor_wang
+	$('.nd-editor-wang').each(function() {
+		var $this = $(this),
+			target = $this.attr('nd-target');
+		require(['beautify-html', 'ace/ace', 'ace/mode/html', 'wangEditor'], function(html_beautify, ace) {
+			
+			// close log
+			wangEditor.config.printLog = false;
+			
+			var editor = new wangEditor($this.get(0));
+			
+			// upload
+			editor.config.uploadImgUrl = baseApi.upload_wang;
+			editor.config.uploadImgFileName = 'upload_file';
+			
+			// filter
+			editor.config.jsFilter = false;
+			
+			// create
+			editor.create();
+			
+			// source
+			var source = editor.menus.source;
+			source.updateSelectedEvent = function() {
+				if(source.isShowCode == true) {
+					if(!source.isShow) {
+						source.isShow = true;
+
+						var textarea = source.$codeTextarea[0];
+						textarea.value = html_beautify.html_beautify(textarea.value);
+
+						// add target
+						$(textarea).parent().append('<pre id="' + target + '" style="min-height:'+$(textarea).height()+'px;"></pre>');
+						$(textarea).addClass('am-hide');
+
+						var ed = ace.edit(target);
+						ed.setValue(textarea.value);
+						ed.session.setMode('ace/mode/html');
+						ed.setOption("minLines", 20);
+
+						ed.getSession().setUseWrapMode(true);
+						ed.setAutoScrollEditorIntoView(true);
+
+						ed.getSession().on('change', function(e) {
+							textarea.value = ed.getValue();
+						});
+
+					}
+				} else {
+					$this.parent().find('.ace_editor').remove();
+					source.isShow = false;
+				}
+				return source.isShowCode;
+			}
+			
+			// fullscreen
+			var fullscreen = editor.menus.fullscreen;
+			fullscreen.updateSelectedEvent = function(){
+				if(editor.isFullScreen == true){
+					$('.admin-area').addClass('admin-fullscreen');
+				}
+				else{
+					$('.admin-area').removeClass('admin-fullscreen');
+				}
+				return editor.isFullScreen;
+			}
+			
 		});
 	});
 

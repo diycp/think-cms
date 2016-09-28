@@ -37,7 +37,7 @@ class Http extends Handle
             $view = ViewLogic::dealView($view);
             
             // 渲染
-            $data = $view->fetch(APP_PATH . 'manage/view/common/jump.html');
+            $data = $view->fetch('manage@common/jump');
             $data = ViewLogic::dealContent($data);
             
             $response = Response::create($data);

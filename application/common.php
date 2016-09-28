@@ -51,6 +51,32 @@ function responseRedirect($url, $param = array(), $need_build = true)
 }
 
 /**
+ * block
+ */
+function block($name, $data = [], $module = 'manage', $method = 'fetch')
+{
+    $class = '\\app\\' . $module . '\\block\\' . ucfirst($name) . 'Block';
+    if (class_exists($class)) {
+        return $class::$method($data);
+    } else {
+        return '';
+    }
+}
+
+/**
+ * search
+ */
+function search($name, $data = [], $module = 'manage', $method = 'field')
+{
+    $class = '\\app\\' . $module . '\\block\\' . ucfirst($name) . 'Block';
+    if (class_exists($class)) {
+        return $class::$method($data);
+    } else {
+        return '';
+    }
+}
+
+/**
  * 记录log
  */
 function addLog($content, $status = 1, $group = 'common')
